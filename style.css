@@ -1,0 +1,23 @@
+body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; }
+        #keyboard,
+        #keyboard2,
+        #keyboard3 { 
+            height: 3em;
+            display:flex;
+            justify-content: center;
+            align-items: center;
+            justify-self: center;
+            background-color: lightblue;
+            border-radius: .5em;
+            margin: 1em;
+        }
+        #keyboard { width: 80%}
+        #keyboard2 { width: 75%}
+        #keyboard3 { width: 70%}
+        #input { font-size: 24px; margin-top: 20px; width: 80%; text-align: center; padding: 10px; }
+
+
+.fullKeyboard{
+    margin-top: 60vh;
+}
+    
