@@ -14,13 +14,29 @@ body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; }
     border-radius: .5em;
     margin: .5em;
 }
-#keyboard { width: 80%}
-#keyboard2 { width: 75%}
-#keyboard3 { width: 70%}
-#input { font-size: 24px; margin-top: 20px; width: 80%; text-align: center; padding: 10px;} 
+#keyboard {
+    width: 80%
+}
+
+#keyboard2 {
+    width: 75%
+}
+
+#keyboard3 {
+    width: 70%
+}
+
+#input { 
+    font-size: 24px; 
+    margin-top: 20px; 
+    width: 80%; 
+    text-align: left; 
+    padding: 10px;
+    height: 10em;
+}
 
 .fullKeyboard{
-    margin-top: 50vh;
+    margin-top: 10em;
     display:flex;
     justify-content: center;
     align-items: center;

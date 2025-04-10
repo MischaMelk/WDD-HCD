@@ -45,9 +45,9 @@
     keyboards.forEach(kb => {
         const element = document.getElementById(kb.id);
 
-        // Mouse events
+
         element.addEventListener("mousedown", (e) => startInteraction(e.clientX, kb, element));
-        // Touch events
+
         element.addEventListener("touchstart", (e) => startInteraction(e.touches[0].clientX, kb, element));
     });
 
