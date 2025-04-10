@@ -12,7 +12,7 @@ body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; }
     justify-self: center;
     background-color: lightblue;
     border-radius: .5em;
-    margin: 1em;
+    margin: .5em;
 }
 #keyboard { width: 80%}
 #keyboard2 { width: 75%}
