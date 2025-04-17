@@ -27,7 +27,7 @@ function moveInteraction(y) {
 
     const diff = y - startY;
 
-    if (Math.abs(diff) > 40) { // gevoeligheid
+    if (Math.abs(diff) > 70) { // gevoeligheid
         let kb = activeKeyboard.obj;
 
         if (diff > 0) {
@@ -84,3 +84,18 @@ document.addEventListener("touchmove", (e) => {
 }, { passive: false });
 
 document.addEventListener("touchend", endInteraction);
+
+
+const space = document.getElementById("spacebar");
+const back = document.getElementById("backspace");
+const shft = document.getElementById("shift");
+const special = document.getElementById("special");
+const numb = document.getElementById("numb"); 
+
+space.addEventListener("click", function() {
+   input.value += " ";
+});
+
+back.addEventListener("click", function() {
+    input.value = input.value.slice(0, -1);
+});
