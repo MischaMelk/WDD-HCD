@@ -1,5 +1,4 @@
-body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; user-select: none;
-width: 100%;}
+body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; user-select: none; width: 100%;}
 
 #keyboard,
 #keyboard2,
@@ -14,7 +13,6 @@ width: 100%;}
     gap: 0.5em; /* ruimte tussen letters */
     width: auto;
 }
-
 
 #input { 
     font-size: 24px; 
@@ -33,13 +31,14 @@ width: 100%;}
 
     width: 100%;
     position: absolute;
-    top: 40%;
+    top: 50%;
     left: 0;
 }
+
 .specialKeyboard{
     margin: 0;
     position:absolute;
-    top: 40%;
+    top: 50%;
     width: 100%;
 }
 
@@ -56,11 +55,10 @@ width: 100%;}
     margin: .5em;
 }
 
-#backspace{top: 0em; right: 0;}
+#backspace{top: 0em; right: 5px;}
 #spacebar{top: 18em; left: 0; width: 80%;}
 #shift{top: 12.3em; left: 0;}
 #numbers{top: 0em; left: 0;}
-
 
 #preview {
     position: fixed;
@@ -75,12 +73,10 @@ width: 100%;}
     display: none;
     pointer-events: none;
     font-weight: bold;
-
     align-items: center;
     flex-direction: column; 
     text-align: center;
 }
-
 
 #shift.active {
     background-color: darkblue;
