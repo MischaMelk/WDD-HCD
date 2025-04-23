@@ -1,101 +1,149 @@
 const keyboards = [
-    { id: "keyboard", letters: "qwertyuiop".split(""), currentIndex: 0 },
-    { id: "keyboard2", letters: "asdfghjkl".split(""), currentIndex: 0 },
-    { id: "keyboard3", letters: "zxcvbnm".split(""), currentIndex: 0 }
-];
-
-const input = document.getElementById("input");
-const preview = document.getElementById("preview");
-
-let isDragging = false;
-let startY = 0;
-let activeKeyboard = null;
-
-function startInteraction(y, keyboardObj, element) {
+    {
+      id: "keyboard",
+      letters: "qwertyuiop".split(""),
+      specialLetters: "1234567890".split(""),
+      currentIndex: 0
+    },
+    {
+      id: "keyboard2",
+      letters: "asdfghjkl".split(""),
+      specialLetters: "!@#$%^&*(".split(""),
+      currentIndex: 0
+    },
+    {
+      id: "keyboard3",
+      letters: "zxcvbnm".split(""),
+      specialLetters: ".,;:?/<>".split(""),
+      currentIndex: 0
+    }
+  ];
+  
+  const input = document.getElementById("input");
+  const preview = document.getElementById("preview");
+  const space = document.getElementById("spacebar");
+  const back = document.getElementById("backspace");
+  const shft = document.getElementById("shift");
+  const numb = document.getElementById("numbers");
+  
+  let isDragging = false;
+  let startY = 0;
+  let activeKeyboard = null;
+  let shiftActive = false;
+  let specialActive = false;
+  
+  function getActiveLetters(kb) {
+    return specialActive ? kb.specialLetters : kb.letters;
+  }
+  
+  function updatePreview(kb) {
+    const letters = getActiveLetters(kb);
+    const currentIndex = kb.currentIndex;
+  
+    const prevIndex = (currentIndex - 1 + letters.length) % letters.length;
+    const nextIndex = (currentIndex + 1) % letters.length;
+  
+    const format = l => shiftActive ? l.toUpperCase() : l.toLowerCase();
+  
+    document.getElementById("prev-letter").textContent = format(letters[prevIndex]);
+    document.getElementById("current-letter").textContent = format(letters[currentIndex]);
+    document.getElementById("next-letter").textContent = format(letters[nextIndex]);
+  }
+  
+  function startInteraction(y, keyboardObj, element) {
     isDragging = true;
     startY = y;
     activeKeyboard = { obj: keyboardObj, element: element };
-
-    const currentLetter = keyboardObj.letters[keyboardObj.currentIndex];
-    element.textContent = currentLetter;
-    preview.textContent = currentLetter;
-    preview.style.display = "block";
-}
-
-function moveInteraction(y) {
+  
+    updatePreview(keyboardObj);
+    const letters = getActiveLetters(keyboardObj);
+    const currentLetter = letters[keyboardObj.currentIndex];
+    const displayLetter = shiftActive ? currentLetter.toUpperCase() : currentLetter.toLowerCase();
+    element.textContent = displayLetter;
+    preview.style.display = "flex";
+  }
+  
+  function moveInteraction(y) {
     if (!isDragging || !activeKeyboard) return;
-
+  
     const diff = y - startY;
-
-    if (Math.abs(diff) > 70) { // gevoeligheid
-        let kb = activeKeyboard.obj;
-
-        if (diff > 0) {
-            kb.currentIndex = (kb.currentIndex + 1) % kb.letters.length;
-        } else {
-            kb.currentIndex = (kb.currentIndex - 1 + kb.letters.length) % kb.letters.length;
-        }
-
-        const currentLetter = kb.letters[kb.currentIndex];
-        activeKeyboard.element.textContent = currentLetter;
-        preview.textContent = currentLetter;
-
-        startY = y; // reset om verder te scrollen
+  
+    if (Math.abs(diff) > 70) {
+      const kb = activeKeyboard.obj;
+      const letters = getActiveLetters(kb);
+  
+      if (diff > 0) {
+        kb.currentIndex = (kb.currentIndex + 1) % letters.length;
+      } else {
+        kb.currentIndex = (kb.currentIndex - 1 + letters.length) % letters.length;
+      }
+  
+      const currentLetter = letters[kb.currentIndex];
+      const displayLetter = shiftActive ? currentLetter.toUpperCase() : currentLetter.toLowerCase();
+      activeKeyboard.element.textContent = displayLetter;
+      updatePreview(kb);
+  
+      startY = y;
     }
-}
-
-function endInteraction() {
+  }
+  
+  function endInteraction() {
     if (!isDragging || !activeKeyboard) return;
-
+  
     const kb = activeKeyboard.obj;
-    input.value += kb.letters[kb.currentIndex];
-
-    // Reset
-    activeKeyboard.element.textContent = kb.letters.join(" ");
+    const letters = getActiveLetters(kb);
+    const currentLetter = letters[kb.currentIndex];
+  
+    input.value += shiftActive ? currentLetter.toUpperCase() : currentLetter.toLowerCase();
+  
+    const displayLetters = letters.map(l => shiftActive ? l.toUpperCase() : l.toLowerCase());
+    activeKeyboard.element.textContent = displayLetters.join(" ");
     preview.style.display = "none";
     isDragging = false;
     activeKeyboard = null;
-}
-
-// Voeg event listeners toe voor elk keyboard element
-keyboards.forEach(kb => {
-    const element = document.getElementById(kb.id);
-
-    // Mouse (desktop)
-    element.addEventListener("mousedown", (e) => startInteraction(e.clientY, kb, element));
-
-    // Touch (mobiel)
-    element.addEventListener("touchstart", (e) => {
-        if (e.touches.length > 0) {
-            startInteraction(e.touches[0].clientY, kb, element);
-        }
+  }
+  
+  function updateKeyboardDisplay() {
+    keyboards.forEach(kb => {
+      const element = document.getElementById(kb.id);
+      const letters = getActiveLetters(kb);
+      const displayLetters = letters.map(l => shiftActive ? l.toUpperCase() : l.toLowerCase());
+      element.textContent = displayLetters.join(" ");
     });
-});
-
-// Algemene document events voor drag beweging en loslaten
-document.addEventListener("mousemove", (e) => moveInteraction(e.clientY));
-document.addEventListener("mouseup", endInteraction);
-
-document.addEventListener("touchmove", (e) => {
+  }
+  
+  shft.addEventListener("click", () => {
+    shiftActive = !shiftActive;
+    updateKeyboardDisplay();
+    shft.classList.toggle("active");
+  });
+  
+  numb.addEventListener("click", () => {
+    specialActive = !specialActive;
+    updateKeyboardDisplay();
+    numb.classList.toggle("active");
+  });
+  
+  keyboards.forEach(kb => {
+    const element = document.getElementById(kb.id);
+    element.addEventListener("mousedown", e => startInteraction(e.clientY, kb, element));
+    element.addEventListener("touchstart", e => {
+      if (e.touches.length > 0) {
+        startInteraction(e.touches[0].clientY, kb, element);
+      }
+    });
+  });
+  
+  document.addEventListener("mousemove", e => moveInteraction(e.clientY));
+  document.addEventListener("mouseup", endInteraction);
+  document.addEventListener("touchmove", e => {
     if (e.touches.length > 0) {
-        moveInteraction(e.touches[0].clientY);
-        e.preventDefault(); // voorkomt scrollen
+      moveInteraction(e.touches[0].clientY);
+      e.preventDefault();
     }
-}, { passive: false });
-
-document.addEventListener("touchend", endInteraction);
-
-
-const space = document.getElementById("spacebar");
-const back = document.getElementById("backspace");
-const shft = document.getElementById("shift");
-const special = document.getElementById("special");
-const numb = document.getElementById("numb"); 
-
-space.addEventListener("click", function() {
-   input.value += " ";
-});
-
-back.addEventListener("click", function() {
-    input.value = input.value.slice(0, -1);
-});
+  }, { passive: false });
+  document.addEventListener("touchend", endInteraction);
+  
+  space.addEventListener("click", () => input.value += " ");
+  back.addEventListener("click", () => input.value = input.value.slice(0, -1));
+  

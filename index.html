@@ -1,33 +1,32 @@
 <!DOCTYPE html>
 <html lang="nl">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Toetsenbord met Slepen</title>
     <link rel="stylesheet" href="style.css">
-
 </head>
-
 <body>
 
     <textarea id="input" readonly></textarea>
-    <div id="preview"></div>
+    <div id="preview">
+        <span id="prev-letter" style="opacity: 0.5; margin-right: 20px;"></span>
+        <span id="current-letter" style="font-size: 80px;"></span>
+        <span id="next-letter" style="opacity: 0.5; margin-left: 20px;"></span>
+    </div>
 
-    <p>Druk en sleep omhoog en omlaag op het toetsenbord om te typen.</p>
     <div class="fullKeyboard">
         <div id="keyboard">q w e r t y u i o p</div>
         <div id="keyboard2">a s d f g h j k l</div>
         <div id="keyboard3">z x c v b n m</div>
     </div>
+
     <div class="specialKeyboard">
         <div id="backspace">Back</div>
         <div id="spacebar">____</div>
         <div id="shift">Shft</div>
-        <div id="special">"/?</div>
         <div id="numbers">123</div>
     </div>
-
 
     <script src="script.js"></script>
 

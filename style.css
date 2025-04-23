@@ -1,4 +1,5 @@
-body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; }
+body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; user-select: none;
+width: 100%;}
 
 #keyboard,
 #keyboard2,
@@ -31,9 +32,15 @@ body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; }
     flex-direction: column;
 
     width: 100%;
+    position: absolute;
+    top: 40%;
+    left: 0;
 }
 .specialKeyboard{
     margin: 0;
+    position:absolute;
+    top: 40%;
+    width: 100%;
 }
 
 #backspace,
@@ -43,16 +50,16 @@ body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; }
 #numbers{
     background-color: blue;
     border-radius: .5em;
-    padding: 1em;
+    padding: 2em;
     color:white;
     position: absolute;
+    margin: .5em;
 }
 
-#backspace{bottom: 22.5em; right: 0;}
-#spacebar{bottom: 4em; left: 25%; width: 50%;}
-#shift{bottom: 10em; left: 0;}
-#special{bottom: 10em; right: 0;}
-#numbers{bottom: 22.5em; left: 0;}
+#backspace{top: 0em; right: 0;}
+#spacebar{top: 18em; left: 0; width: 80%;}
+#shift{top: 12.3em; left: 0;}
+#numbers{top: 0em; left: 0;}
 
 
 #preview {
@@ -63,9 +70,18 @@ body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; }
     font-size: 60px;
     background-color: rgb(50, 150, 50);
     color: white;
-    padding: .5em;
+    padding: .5em 1em;
     border-radius: 20px;
-    display: none; 
+    display: none;
     pointer-events: none;
     font-weight: bold;
+
+    align-items: center;
+    flex-direction: column; 
+    text-align: center;
+}
+
+
+#shift.active {
+    background-color: darkblue;
 }
