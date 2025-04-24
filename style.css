@@ -31,14 +31,14 @@ body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; use
 
     width: 100%;
     position: absolute;
-    top: 50%;
+    top: 42%;
     left: 0;
 }
 
 .specialKeyboard{
     margin: 0;
     position:absolute;
-    top: 50%;
+    top: 42%;
     width: 100%;
 }
 
