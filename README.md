@@ -83,3 +83,14 @@ Helaas kom ik nu tijd tekort om nog dingen aan te passen voor de deadline. Mocht
 3. **Personalisatie in de gevoeligheid**
     
     Nu gaat de volgende letter na 70px zodra je sleept op het toetsenbord. Dit wil ik overlaten aan de gebruiker, zodat hij kan kiezen hoe ver je moet swipen. Dit wil ik dan het liefst doen met behulp van een slider.
+
+
+    Bronnen:
+    https://chatgpt.com/share/680b4f57-376c-8006-b3f6-b50d2d57208e
+
+    https://developer.mozilla.org/en-US/docs/Web/API/Element/touchmove_event
+
+    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/split
+
+    https://chatgpt.com/share/680b57f8-d288-8006-b3ee-c44a8fba4a36 
+    
